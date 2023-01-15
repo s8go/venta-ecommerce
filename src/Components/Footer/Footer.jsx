@@ -1,52 +1,226 @@
 import React, { useState } from "react";
-import {FaGreaterThan} from "react-icons/fa"
+import {
+  FaGreaterThan,
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaPaypal,
+  FaCcMastercard,
+  FaAmazonPay,
+  FaGooglePay,
+  FaCcVisa,
+} from "react-icons/fa";
 
 const Footer = () => {
-const [reveal, setReveal] = useState(false);
+  const [reveal, setReveal] = useState(false);
 
-const openTab = (prev, curr) =>{
-  if(prev !== curr) setReveal(curr)
-  else setReveal(false)
-}
+  const openTab = (prev, curr) => {
+    if (prev !== curr) setReveal(curr);
+    else setReveal(false);
+  };
 
   return (
-    <footer>
-      <div>LOGO</div>
+    <footer className="py-6">
+      <div className="text-center grid item-center justify-center">
+        {" "}
+        <svg width="200" height="50" className="text-orange-100">
+          <text x="100" y="40" fontSize={"32"} fill="rgb(124 45 18)">
+            ENTA
+          </text>
+          <path
+            d="M50 0 L60 0 L70 30 L80 0 L90 0 L95 5 L75 50 L65 50 L45 5 Z"
+            fill="rgb(124 45 18)"
+          />
+        </svg>
+      </div>
 
-    <div className="bg-orange-900 text-center cursor-pointer group">
-          
-          <div className="border-b border-b-black p-3">
-          <p onClick={()=>openTab(reveal, "quick") } className="text-sm flex justify-between px-24">QUICK LINKS <span className="ml-4 inline-block rotate-90 "><FaGreaterThan/></span> </p>
-          <ul className={`duration-300 ${reveal === 'quick' ? 'h-28' : 'h-0'}`}>
-            <li  className={`${reveal === 'quick' ? 'block' : 'hidden'} text-xs my-2`}><p>FAQs</p></li>
-            <li  className={`${reveal === 'quick' ? 'block' : 'hidden'} text-xs my-2`}><p>Contact Us</p></li>
-            <li  className={`${reveal === 'quick' ? 'block' : 'hidden'} text-xs my-2`}><p>Privacy Policy</p></li>
-            <li  className={`${reveal === 'quick' ? 'block' : 'hidden'} text-xs my-2`}><p>Terms of Service</p></li>
-            <li  className={`${reveal === 'quick' ? 'block' : 'hidden'} text-xs my-2`}><p>Refund Policy</p></li>
+      <div className="bg-orange-900 text-center cursor-pointer group lg:flex justify-evenly">
+        <div className="border-b border-b-black p-3">
+          <p
+            onClick={() => openTab(reveal, "quick")}
+            className="text-sm lg:text-base"
+          >
+            QUICK LINKS{" "}
+            <span className="ml-4 inline-block rotate-90 lg:hidden ">
+              <FaGreaterThan />
+            </span>{" "}
+          </p>
+          <ul
+            className={`duration-300 ${
+              reveal === "quick" ? "h-44" : "h-0"
+            } lg:h-full lg:mt-8`}
+          >
+            <li
+              className={`${
+                reveal === "quick" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>FAQs</p>
+            </li>
+            <li
+              className={`${
+                reveal === "quick" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>Contact Us</p>
+            </li>
+            <li
+              className={`${
+                reveal === "quick" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>Privacy Policy</p>
+            </li>
+            <li
+              className={`${
+                reveal === "quick" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>Terms of Service</p>
+            </li>
+            <li
+              className={`${
+                reveal === "quick" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>Refund Policy</p>
+            </li>
           </ul>
-          </div>
+        </div>
 
-          <div className="border-b border-b-black p-3">
-          <p onClick={()=>openTab(reveal, "about") } className="text-sm flex justify-between px-24">ABOUT US <span className="ml-4 inline-block rotate-90 "><FaGreaterThan/></span></p>
-          <ul className={`duration-300 ${reveal === 'about' ? 'h-28' : 'h-0'}`}>
-            <li  className={`${reveal === 'about' ? 'block' : 'hidden'} text-xs my-2`}><p>Locations</p></li>
-            <li  className={`${reveal === 'about' ? 'block' : 'hidden'} text-xs my-2`}><p>Careers</p></li>
-            <li  className={`${reveal === 'about' ? 'block' : 'hidden'} text-xs my-2`}><p>Interns</p></li>
-            <li  className={`${reveal === 'about' ? 'block' : 'hidden'} text-xs my-2`}><p>Blog</p></li>
+        <div className="border-b border-b-black p-3">
+          <p
+            onClick={() => openTab(reveal, "about")}
+            className="text-sm  lg:text-base"
+          >
+            ABOUT US{" "}
+            <span className="ml-4 inline-block rotate-90 lg:hidden ">
+              <FaGreaterThan />
+            </span>
+          </p>
+          <ul
+            className={`duration-300 ${
+              reveal === "about" ? "h-44" : "h-0"
+            } lg:h-full lg:mt-8`}
+          >
+            <li
+              className={`${
+                reveal === "about" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>Locations</p>
+            </li>
+            <li
+              className={`${
+                reveal === "about" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>Careers</p>
+            </li>
+            <li
+              className={`${
+                reveal === "about" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>Interns</p>
+            </li>
+            <li
+              className={`${
+                reveal === "about" ? "block" : "hidden"
+              } text-sm my-4 lg:block `}
+            >
+              <p>Blog</p>
+            </li>
           </ul>
-          </div>
+        </div>
 
-          <div className="border-b border-b-black p-3">
-          <p onClick={()=>openTab(reveal, "sign") } className="text-sm flex justify-between px-24">SIGN UP <span className="ml-4 inline-block rotate-90 "><FaGreaterThan/></span></p>
-          <div className={`duration-300 ${reveal === 'sign' ? 'h-28' : 'h-0'}`}>
-            <p  className={`${reveal === 'sign' ? 'block' : 'hidden'} text-xs my-2`}>Subscribe to get special offers, free giveaways, and amazing deals.</p>
-            <input className={`${reveal === 'sign' ? 'block' : 'hidden'} block w-full  text-center p-2 border rounded-lg text-xs my-2`} placeholder="Enter your email"/>
-          
+        <div className="border-b border-b-black p-3">
+          <p
+            onClick={() => openTab(reveal, "sign")}
+            className="text-sm  lg:text-base"
+          >
+            SIGN UP{" "}
+            <span className="ml-4 inline-block rotate-90 lg:hidden ">
+              <FaGreaterThan />
+            </span>
+          </p>
+          <div
+            className={`duration-300 ${
+              reveal === "sign" ? "h-44" : "h-0"
+            } lg:h-full lg:mt-8`}
+          >
+            <p
+              className={`${
+                reveal === "sign" ? "block" : "hidden"
+              } text-sm  lg:block my-7`}
+            >
+              Subscribe to get special offers, free giveaways, and amazing
+              deals.
+            </p>
+            <input
+              className={`${
+                reveal === "sign" ? "block" : "hidden"
+              } lg:block w-full  text-center p-2 border rounded-lg text-xs my-2`}
+              placeholder="Enter your email"
+              type={"text"}
+            />
+            <input
+              className={`${
+                reveal === "sign" ? "block" : "hidden"
+              } lg:block w-32 mx-auto text-orange-100  text-center p-2 border rounded-lg text-xs my-2`}
+              value={"Subscribe"}
+              type={"button"}
+            />
           </div>
-          </div>
-     </div>
+        </div>
+      </div>
 
-     
+      <div className=" text-orange-900 text-center flex justify-center text-2xl m-6">
+        <a
+          href="https://facebook.com/ventashop"
+          className="block mx-2"
+          target={"_blank"}
+        >
+          <FaFacebook />
+        </a>
+        <a
+          href="https://twitter.com/seego"
+          className="block mx-2"
+          target={"_blank"}
+        >
+          {" "}
+          <FaTwitter />
+        </a>
+        <a
+          href="https://instagram.com/seego0"
+          className="block mx-2"
+          target={"_blank"}
+        >
+          <FaInstagram />
+        </a>
+      </div>
+
+      <div className=" text-orange-900 text-center flex justify-center text-2xl mt-12">
+        <FaAmazonPay className="block mx-2" />
+        <FaCcMastercard className="block mx-2" />
+        <FaGooglePay className="block mx-2" />
+        <FaPaypal className="block mx-2" />
+        <FaCcVisa className="block mx-2" />
+      </div>
+
+      <div className=" text-orange-900 flex flex-col items-center mt-6 text-sm">
+        <p>
+          This site was designed and developed by{" "}
+          <a
+            href="https://github.com/seegocode"
+            target={"_blank"}
+            className="bg-orange-900 text-orange-100 p-1 hover:bg-transparent hover:border hover:border-orange-900 hover:text-orange-900 shadow hover:shadow-black shadow-md duration-500"
+          >
+            SEEGO
+          </a>
+        </p>
+        <p>&copy; 2023</p>
+      </div>
     </footer>
   );
 };

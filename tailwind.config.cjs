@@ -15,7 +15,7 @@ module.exports = {
       },
 
       backgroundColor:{
-        "text-show": "rgba(0,0,0,0.2)"
+        "text-show": "rgba(0,0,0,0.5)"
       }
     },
 
