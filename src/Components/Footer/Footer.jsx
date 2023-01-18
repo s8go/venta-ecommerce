@@ -21,17 +21,18 @@ const Footer = () => {
 
   return (
     <footer className="py-6">
-      <div className="text-center grid item-center justify-center">
+      <div className="text-center grid item-center justify-center m-3">
         {" "}
-        <svg width="200" height="50" className="text-orange-100">
-          <text x="100" y="40" fontSize={"32"} fill="rgb(124 45 18)">
-            ENTA
-          </text>
-          <path
-            d="M50 0 L60 0 L70 30 L80 0 L90 0 L95 5 L75 50 L65 50 L45 5 Z"
-            fill="rgb(124 45 18)"
-          />
-        </svg>
+        <svg width="100" height="30" className="">
+            <text x="40" y="25" fontSize={"20"} fill="rgb(124 45 18)">
+              ENTA
+            </text>
+            <path
+              d="M0 0 L5 0 L15 20 L20 0 L25 0 L45 0 L15 30 Z"
+
+              fill="rgb(124 45 18)"
+            />
+          </svg>
       </div>
 
       <div className="bg-orange-900 text-center cursor-pointer group lg:flex justify-evenly">
@@ -160,7 +161,7 @@ const Footer = () => {
             <input
               className={`${
                 reveal === "sign" ? "block" : "hidden"
-              } lg:block w-full  text-center p-2 border rounded-lg text-xs my-2`}
+              } lg:block w-full  text-center text-orange-900 outline-0 p-2 border rounded-lg text-xs my-2`}
               placeholder="Enter your email"
               type={"text"}
             />
