@@ -109,12 +109,12 @@ const MobileNav = () => {
         </Link>
 
         <ul className="flex justify-between text-sm text-orange-900 w-full mx-32 ">
-          <li><p className="cursor-pointer">New Arrival</p></li>
-          <li><p className="cursor-pointer">Men Wears</p></li>
-          <li><p className="cursor-pointer">Ladies</p></li>
-          <li><p className="cursor-pointer">Smartphones</p></li>
-          <li><p className="cursor-pointer">Electronics</p></li>
-          <li><p className="cursor-pointer">Fashion</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">New Arrival</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Men Wears</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Ladies</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Smartphones</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Electronics</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Fashion</p></li>
         </ul>
 
         <div className="flex text-orange-900 text-lg justify-between w-32 h-full cursor-pointer">
