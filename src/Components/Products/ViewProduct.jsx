@@ -1,19 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Image from "../../assets/products/main/ALPHX-EDITS.jpg";
-import { selectProducts } from "../../redux/ProductsSlice";
-import { useSelector } from "react-redux/es/exports";
+import {  selectProductById, getProductById, productActions} from "../../redux/ProductsSlice";
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { useParams } from "react-router-dom";
+
 
 const ViewProduct = () => {
   const [size, setSize] = useState(null);
-  const products = useSelector((state) => selectProducts(state));
-  const product = products && products[47];
+  const product = useSelector(state => selectProductById(state))
   const [prodImage, setProdImage] = useState(0);
-  console.log(products);
+  const {id} = useParams()
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+      dispatch(getProductById(id.slice(id.indexOf("==") + 2)))
+      }, [])
 
   return (
     <>
-      {products && (
+      {product && (
         <div className="my-4 mt-24 p-4 lg:px-12  flex flex-col lg:flex-row justify-center items-center text-orange-900 lg:h-[90vh] lg:min-h-[500px]">
           <motion.div
             initial={{
@@ -111,7 +116,10 @@ const ViewProduct = () => {
             </div>
 
             <div className="text-sm mt-6">
-              <p className=" border border-orange-900 text-center text-lg p-4 cursor-pointer">
+              <p className=" border border-orange-900 text-center text-lg p-4 cursor-pointer" onClick={()=>{
+                dispatch(productActions.addToCart({image: product.images[0], id: product.id, title: product.title, category: product.category, quantity: 1, price: product.price}))
+               
+              }}>
                 ADD TO CART
               </p>
               <p className=" border text-orange-100 mt-4 bg-orange-900 text-center text-lg p-4 cursor-pointer">

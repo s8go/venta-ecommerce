@@ -1,28 +1,65 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import Image from "../../assets/products/main/ALPHX-EDITS.jpg";
 import { FaGreaterThan } from "react-icons/fa";
-import { useParams } from "react-router-dom";
-import { selectProducts } from "../../redux/ProductsSlice";
+import { getCategories, selectCategories } from "../../redux/ProductsSlice";
 import { useSelector } from "react-redux/es/exports";
+import Pagination from "./Pagination";
+import Prod from "./Items";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
   // const [products, setProducts] = useState(undefined)
   //   const {id} = useParams();
+  const dispatch = useDispatch();
+  const {id} = useParams()
+  
+  const products = useSelector((state) => selectCategories(state));
+  const [page, setPage] = useState({
+    pageView: 2,
+    posts: [0, 12],
+  });
 
-  const products = useSelector((state) => selectProducts(state));
-  const [posts, setPosts] = useState([0, 12])
-  const [paginStart, setPaginStart] = useState()
-  const length = products && new Array(Math.ceil(products.length/12)).fill(0).slice(paginStart);
-  console.log()
+  useEffect(()=>{
+if(!id.includes("search")) dispatch(getCategories(id))
+  }, [])
+  
+  const [smartPhones, setSmart] = useState(null)
 
+  // console.log(products)
+  const [length, setLength] = useState([]);
+
+  useEffect(() => {
+    let arr = [];
+    if (products) {
+      setSmart(products.filter((prod)=>{
+        if(prod.category === "smartphones") return prod
+      }));
+      
+      let prods = new Array(Math.ceil(products.length / 12));
+      for (let i = 0; i < prods.length; i++) {
+        arr.push(i + 1);
+      }
+    }
+    setLength(arr);
+  }, [products]);
+
+  function changePage(x) {
+    let top = 12 * (x - 1);
+    setPage((curr) => {
+      if (x !== 1) {
+        return { posts: [top, 12 * x], pageView: x };
+      }
+      return { pageView: 2, posts: [0, 12] };
+    });
+
+  }
 
   return (
     <>
       {products !== undefined && (
         <div className="text-orange-900  text-center p-4 mt-24">
           <div className="mt-8 mb-16">
-            <h1 className="text-2xl">Casual Dresses</h1>
+            <h1 className="text-2xl">{(id[0].toLocaleUpperCase() + id.slice(1).toLocaleLowerCase()) || "All Products"}</h1>
 
             <div className="flex flex-col lg:flex-row justify-between mt-4 lg:px-8">
               <p>{products.length} Products</p>
@@ -43,28 +80,25 @@ const Products = () => {
             </div>
           </div>
 
+          <Pagination length={length} page={page} changePage={changePage}/>
+
           <div className=" grid grid-cols-2 md:grid-cols-3 py-4 lg:grid-cols-4 place-items-center ">
-            {products.slice(posts[0], posts[1]).map((item, index) => {
-                return (
-                  <div key={item.id}>
-                    <Prod
-                      image={item.thumbnail}
-                      price={item.price}
-                      title={item.title}
-                    />
-                  </div>
-                );
+            {products.slice(page.posts[0], page.posts[1]).map((item, index) => {
+              return (
+                <div key={item.id}>
+                  <Prod
+                    image={item.thumbnail}
+                    price={item.price}
+                    title={item.title}
+                    id={item.id}
+                  />
+                </div>
+              );
             })}
           </div>
 
-          <div className="grid grid-cols-11 items-center">
-            {
-          length.map((pag, index)=>{
-            
-           if(index >= paginStart)  return <p className="bg-red-500 mx-1 text-sm p-1 cursor-pointer" key={products[index].id}>{posts[0] + 1 + index}</p>;
-          })
-            }
-          </div>
+            <Pagination length={length} page={page} changePage={changePage}/>
+       
         </div>
       )}
     </>
@@ -73,29 +107,3 @@ const Products = () => {
 
 export default Products;
 
-const Prod = ({ title, price, image }) => (
-  <motion.div
-    className=" w-[40vw] md:w-60 xl:w-72 h-[15em] lg:h-[25em] mt-4 lg:mt-12 text-center"
-    initial={{
-      y: 70,
-    }}
-    whileInView={{
-      y: 0,
-    }}
-    transition={{
-      duration: 0.5,
-    }}
-    viewport={{
-      once: false,
-      amount: 0.2,
-    }}
-  >
-    <img src={image} alt="Products" className="block w-full h-3/5" />
-    <div className="h-2/5 w-full grid items-center justify-center shadow-orange-200 shadow-md">
-      <div className="text-base lg:text-lg">
-        <h5>{title}</h5>
-        <p>${price}</p>
-      </div>
-    </div>
-  </motion.div>
-);

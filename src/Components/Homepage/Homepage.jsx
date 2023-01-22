@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
-import { selectProducts } from "../../redux/ProductsSlice";
-import { useSelector } from "react-redux/es/exports";
+import { selectProducts, getCategories } from "../../redux/ProductsSlice";
+import { useSelector, useDispatch } from "react-redux/es/exports";
 //swiper css
 import "swiper/css";
 import { useNavigate } from "react-router-dom";
@@ -9,8 +9,22 @@ import { useNavigate } from "react-router-dom";
 const Homepage = () => {
   const Navigate = useNavigate();
   const products = useSelector((state) => selectProducts(state));
+  const dispatch = useDispatch();
 
-  console.log(products);
+
+
+  async function showProducts(cat, url){
+    await dispatch(getCategories(cat))
+    await Navigate(url);
+    return
+  }
+
+  // async function checkProduct(id, url){
+  //   await dispatch(getProductById(id))
+  //   await Navigate(url);
+  //   return
+  // }
+
 
   return (
     <>
@@ -18,7 +32,7 @@ const Homepage = () => {
         <div className="p-2 mt-24 overflow-hidden">
           <div
             className="h-[80vh]  relative lg:h-[95vh] min-h-[200px] lg:min-h-[500px] mt-1 cursor-pointer lg:flex"
-            onClick={() => Navigate("/products/new-arrivals")}
+            onClick={() => showProducts("laptops", "/products/laptops") }
           >
             {products && (
               <>
@@ -54,15 +68,15 @@ const Homepage = () => {
               <ProductCategories
                 src={products[1].images[1]}
                 delay={0.2}
-                onClick={() => Navigate("/products/gadgets")}
+                onClick={() => showProducts("laptops", "/products/smartphones") }
               >
-                GADGETS{" "}
+                SMARTPHONES
               </ProductCategories>
 
               <ProductCategories
                 src={products[31].images[2]}
                 delay={0.4}
-                onClick={() => Navigate("/products/furnitures")}
+                onClick={() => Navigate("/products/furniture")}
               >
                 FURNITURES
               </ProductCategories>
@@ -70,17 +84,17 @@ const Homepage = () => {
               <ProductCategories
                 src={products[91].images[1]}
                 delay={0.2}
-                onClick={() => Navigate("/products/motocycles")}
+                onClick={() => showProducts("laptops", "/products/motorcycle") }
               >
                 MOTOCYCLES
               </ProductCategories>
 
               <ProductCategories
-                src={products[62].images[1]}
+                src={products[11].images[1]}
                 delay={0.4}
-                onClick={() => Navigate("/products/wristwatches")}
+                onClick={() => showProducts("laptops", "/products/fragrances") }
               >
-                WRISTWATCHES
+                FRAGRANCES
               </ProductCategories>
             </div>
 
@@ -109,7 +123,7 @@ const Homepage = () => {
                 />
                 <div
                   className="absolute w-full h-full top-0 left-0 flex justify-center items-start flex-col  p-3 cursor-pointer"
-                  onClick={() => Navigate("/products/latest")}
+                  onClick={() => showProducts("laptops", "/products/womens-dresses") }
                 >
                   <h3 className="text-xl">FOR THE LADIES</h3>
                   <button className="text-lg border border-orange-100 p-2">
@@ -141,8 +155,8 @@ const Homepage = () => {
                   className="block h-full w-full filter brightness-90"
                 />
                 <div
-                  className="absolute w-full h-full top-0 left-0 flex justify-center items-end flex-col  p-3"
-                  onClick={() => Navigate("products/shoes/nike-airforce")}
+                  className="absolute w-full h-full top-0 left-0 flex justify-center items-end flex-col  p-3 cursor-pointer"
+                  onClick={() => showProducts("laptops", "/products/mens-shirts") }
                 >
                   <h3 className="text-xl">FOR THE GENTS</h3>
                   <button className="text-lg border border-orange-100 p-2">
@@ -168,7 +182,7 @@ const Homepage = () => {
 
             <motion.div
               className="h-72 relative mt-2 lg:h-[90vh]"
-              onClick={() => Navigate("/products")}
+              onClick={() => showProducts("men-shoes", "/products/mens-shoes") }
               initial={{ scaleX: 2, y: -70 }}
               whileInView={{
                 scaleX: 1,
@@ -187,7 +201,7 @@ const Homepage = () => {
                 alt="Show new"
                 className="block h-full w-full filter brightness-90"
               />
-              <div className="absolute w-full h-full top-0 left-0 flex justify-center items-end flex-col p-3 ">
+              <div className="absolute w-full h-full top-0 left-0 flex justify-center items-end flex-col p-3 cursor-pointer">
                 <button className="text-lg border border-orange-100 p-2">
                   SHOP NOW
                 </button>
@@ -198,7 +212,7 @@ const Homepage = () => {
               <p className="text-sm lg:pr-1">BUY SUNGLASSES</p>
               <p
                 className="text-sm lg:pl-1 mt-2 lg:mt-0 border-orange-300 border p-2 w-1/2 mx-auto lg:w-auto lg:mx-0 cursor-pointer"
-                onClick={() => Navigate("/products/sunglasses")}
+                onClick={() => showProducts("sunglasses", "/products/sunglasses") }
               >
                 SHOP FOR SUNGLASSES
               </p>
@@ -206,7 +220,7 @@ const Homepage = () => {
 
             <div className="lg:flex w-full ">
               <motion.div
-                className="h-72 relative w-full lg:h-[30em] lg:mr-[2px]"
+                className="h-72 relative w-full lg:h-[30em] lg:mr-[2px] cursor-pointer"
                 initial={{
                   x: "30vw",
                 }}
@@ -221,6 +235,7 @@ const Homepage = () => {
                   once: false,
                   amount: 0.3,
                 }}
+                onClick={() => showProducts("mens-shirts", "/products/mens-shirts") }
               >
                 <img
                   src={products[54].images[4]}
@@ -253,7 +268,7 @@ const Homepage = () => {
                   amount: 0.3,
                 }}
                 className="h-72 relative mt-[1px] w-full lg:h-[30em] lg:ml-[2px] cursor-pointer"
-                onClick={() => Navigate("/products")}
+                onClick={() => showProducts("womens-bags", "/products/womens-bags") }
               >
                 <img
                   src={products[71].images[0]}
@@ -310,17 +325,21 @@ const Homepage = () => {
                       prod.category === ""
                     ) {
                       return (
-                        <div>
-                          <SwiperSlide>
+                        
+                          <SwiperSlide key={prod.id}>
                             <NewArrival
                               src={prod.thumbnail}
-                              onClick={() => Navigate("/product/")}
+                              onClick={ () => {
+                             Navigate("/product/" + prod.title + "==" + prod.id)
+                              }
+                            }
+                             
                             >
                               <h6>{prod.title}</h6>
                               <p>${prod.price}</p>
                             </NewArrival>
                           </SwiperSlide>
-                        </div>
+                
                       );
                     }
                   })}
@@ -382,19 +401,20 @@ const ProductCategories = ({ src, children, onClick, delay }) => {
   );
 };
 
-const NewArrival = ({ src, children, onClick }) => {
+const NewArrival = ({ src, children, onClick, key }) => {
   return (
     <div
-      className=" m-1 w-[90%] h-[25em] lg:h-[30em] text-center cursor-pointer"
+      className=" m-1 w-[90%] h-[17em] lg:h-[30em] text-center cursor-pointer"
       onClick={onClick}
+      key={key}
     >
       <img
         src={src}
         alt="Products categories"
-        className="block w-full h-[80%]"
+        className="block w-full h-[70%]"
       />
-      <div className="w-full h-[20%] grid items-center justify-center shadow-orange-200 shadow-md">
-        <div className="mt-4 text-sm text-orange-900 ">{children}</div>
+      <div className="w-full h-[30%] grid items-center justify-center shadow-orange-200 shadow-md">
+        <div className="mt-4 text-xs lg:text-sm text-orange-900 ">{children}</div>
       </div>
     </div>
   );

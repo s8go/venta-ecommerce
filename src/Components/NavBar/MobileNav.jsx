@@ -1,8 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaCartArrowDown, FaBars, FaSearch } from "react-icons/fa";
 import Menu from "./Menu";
+import { useSelector} from "react-redux/es/exports";
+import { selectCart} from "../../redux/ProductsSlice";
+
 
 const AdVariant = {
   init: { y: 100 },
@@ -10,6 +13,7 @@ const AdVariant = {
 };
 const MobileNav = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const cart = useSelector(state => selectCart(state) )
 
   return (
     <>
@@ -83,6 +87,7 @@ const MobileNav = () => {
 
           <Link to="/cart">
             <FaCartArrowDown />
+            <p>{cart.length || 0}</p>
           </Link>
         </div>
       </motion.nav>
@@ -122,6 +127,8 @@ const MobileNav = () => {
           <FaSearch />
         </div>
           <FaCartArrowDown className="block w-[500px] h-full " />
+          <p>{cart.length || 0}</p>
+
         </div>
       </motion.nav>
     </>
