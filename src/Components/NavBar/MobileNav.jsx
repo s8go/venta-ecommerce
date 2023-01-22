@@ -1,8 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaCartArrowDown, FaBars, FaSearch } from "react-icons/fa";
 import Menu from "./Menu";
+import { useSelector} from "react-redux/es/exports";
+import { selectCart} from "../../redux/ProductsSlice";
+
 
 const AdVariant = {
   init: { y: 100 },
@@ -10,6 +13,7 @@ const AdVariant = {
 };
 const MobileNav = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const cart = useSelector(state => selectCart(state) )
 
   return (
     <>
@@ -83,6 +87,7 @@ const MobileNav = () => {
 
           <Link to="/cart">
             <FaCartArrowDown />
+            <p>{cart.length || 0}</p>
           </Link>
         </div>
       </motion.nav>
@@ -109,12 +114,12 @@ const MobileNav = () => {
         </Link>
 
         <ul className="flex justify-between text-sm text-orange-900 w-full mx-32 ">
-          <li><p className="cursor-pointer">New Arrival</p></li>
-          <li><p className="cursor-pointer">Men Wears</p></li>
-          <li><p className="cursor-pointer">Ladies</p></li>
-          <li><p className="cursor-pointer">Smartphones</p></li>
-          <li><p className="cursor-pointer">Electronics</p></li>
-          <li><p className="cursor-pointer">Fashion</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">New Arrival</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Men Wears</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Ladies</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Smartphones</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Electronics</p></li>
+          <li><p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">Fashion</p></li>
         </ul>
 
         <div className="flex text-orange-900 text-lg justify-between w-32 h-full cursor-pointer">
@@ -122,6 +127,8 @@ const MobileNav = () => {
           <FaSearch />
         </div>
           <FaCartArrowDown className="block w-[500px] h-full " />
+          <p>{cart.length || 0}</p>
+
         </div>
       </motion.nav>
     </>

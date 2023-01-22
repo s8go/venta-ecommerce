@@ -11,7 +11,8 @@ module.exports = {
         'roboto': ['Roboto', 'sans-serif'],
       },
       gridTemplateColumns:{
-        'sm': 'repeat(2, minmax(110px, 1fr))'
+        'sm': 'repeat(2, minmax(110px, 1fr))',
+        
       },
 
       backgroundColor:{
