@@ -16,11 +16,16 @@ const MobileNav = () => {
   const cart = useSelector((state) => selectCart(state));
   const dispatch = useDispatch();
   const Navigate = useNavigate();
+  const [searchFocus, setSearchFocus] = useState(false)
 
   async function showProducts(cat, url) {
     await dispatch(getCategories(cat));
     await Navigate(url);
     return;
+  }
+
+  function search(){
+setSearchFocus(true)
   }
 
   return (

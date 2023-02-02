@@ -49,6 +49,21 @@ state.data.status = "stopFetch"
 
       window.localStorage.cart = JSON.stringify(state.data.cart)
     },
+
+    changeQuantity(state, actions){
+      const value = state.data.cart.map((item)=>{
+        if(item.id === actions.payload.id && actions.payload.type === "increase") return {
+          ...item, quantity: item.quantity + 1
+        };
+        else if(item.id === actions.payload.id && actions.payload.type === "decrease") return {
+          ...item, quantity: item.quantity - 1
+        }
+        return item
+      })
+
+      state.data.cart = value;
+      window.localStorage.cart = JSON.stringify(value)
+    }
   },
 
   extraReducers: (build) => {
