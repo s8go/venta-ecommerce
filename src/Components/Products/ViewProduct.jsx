@@ -1,24 +1,46 @@
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {  selectProductById, getProductById, productActions} from "../../redux/ProductsSlice";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { useParams } from "react-router-dom";
+import Alert from "../Others/Alert";
+import Loading from "../Others/Loading";
 
 
 const ViewProduct = () => {
   const [size, setSize] = useState(null);
-  const product = useSelector(state => selectProductById(state))
+  const product = useSelector(state => selectProductById(state));
+  // const [product, setProduct] = useState([])
   const [prodImage, setProdImage] = useState(0);
   const {id} = useParams()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(()=>{
+    setTimeout(()=>setShowAlert(false), 1000)
+    // setProduct(c =>{
+    //   if(viewedProduct.length > 0) return viewedProduct;
+    //   return null;
+    // })
+  })
 
   useEffect(()=>{
       dispatch(getProductById(id.slice(id.indexOf("==") + 2)))
+
+      return ()=>{
+        dispatch(productActions.clearCartegories())
+      }
       }, [])
 
   return (
     <>
-      {product && (
+
+    {
+      showAlert && <Alert/>
+    }
+
+      {typeof product.title === "string" ? (
         <div className="my-4 mt-24 p-4 lg:px-12  flex flex-col lg:flex-row justify-center items-center text-orange-900 lg:h-[90vh] lg:min-h-[500px]">
           <motion.div
             initial={{
@@ -76,7 +98,7 @@ const ViewProduct = () => {
               <p className="text-xl mt-4">Designs</p>
 
               <p className="text-lg mt-3">
-                {product.images.map((image, index) => {
+                {product?.images.map((image, index) => {
                   return (
                     <img
                       key={image}
@@ -117,8 +139,11 @@ const ViewProduct = () => {
 
             <div className="text-sm mt-6">
               <p className=" border border-orange-900 text-center text-lg p-4 cursor-pointer" onClick={()=>{
-                dispatch(productActions.addToCart({image: product.images[0], id: product.id, title: product.title, category: product.category, quantity: 1, price: product.price}))
-               
+                const item = {image: product.images[0], id: product.id, title: product.title, category: product.category, quantity: 1, price: product.price}
+                dispatch(productActions.addToCart({...item}))
+               setShowAlert(true);
+
+               window.localStorage.cart = JSON.stringify( [...JSON.parse(window.localStorage.cart), item])
               }}>
                 ADD TO CART
               </p>
@@ -131,7 +156,11 @@ const ViewProduct = () => {
             </div>
           </div>
         </div>
-      )}
+      ) :
+
+      <Loading>Loading...</Loading>
+    
+    }
     </>
   );
 };

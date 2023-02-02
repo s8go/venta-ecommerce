@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  FaGreaterThan,
   FaFacebook,
   FaTwitter,
   FaInstagram,
@@ -42,8 +41,12 @@ const Footer = () => {
             className="text-sm lg:text-base"
           >
             QUICK LINKS{" "}
-            <span className="ml-4 inline-block rotate-90 lg:hidden ">
-              <FaGreaterThan />
+            <span className="ml-4 inline-block lg:hidden ">
+                <svg width={"12"} height="8">
+                      <line x1="0" y1="0" x2="6" y2="8" fill="rrgb(255, 237, 213)" stroke="rgb(255, 237, 213)"/>
+                      <line x1="6" y1="8" x2="12" y2="0" fill="rgb(255, 237, 213)" stroke="rgb(255, 237, 213)"/>
+
+                     </svg>
             </span>{" "}
           </p>
           <ul
@@ -95,8 +98,12 @@ const Footer = () => {
             className="text-sm  lg:text-base"
           >
             ABOUT US{" "}
-            <span className="ml-4 inline-block rotate-90 lg:hidden ">
-              <FaGreaterThan />
+            <span className="ml-4 inline-block lg:hidden ">
+                <svg width={"12"} height="8">
+                      <line x1="0" y1="0" x2="6" y2="8" fill="rrgb(255, 237, 213)" stroke="rgb(255, 237, 213)"/>
+                      <line x1="6" y1="8" x2="12" y2="0" fill="rgb(255, 237, 213)" stroke="rgb(255, 237, 213)"/>
+
+                     </svg>
             </span>
           </p>
           <ul
@@ -141,8 +148,12 @@ const Footer = () => {
             className="text-sm  lg:text-base"
           >
             SIGN UP{" "}
-            <span className="ml-4 inline-block rotate-90 lg:hidden ">
-              <FaGreaterThan />
+            <span className="ml-4 inline-block lg:hidden ">
+                <svg width={"12"} height="8">
+                      <line x1="0" y1="0" x2="6" y2="8" fill="rrgb(255, 237, 213)" stroke="rgb(255, 237, 213)"/>
+                      <line x1="6" y1="8" x2="12" y2="0" fill="rgb(255, 237, 213)" stroke="rgb(255, 237, 213)"/>
+
+                     </svg>
             </span>
           </p>
           <div
@@ -215,7 +226,7 @@ const Footer = () => {
           <a
             href="https://github.com/seegocode"
             target={"_blank"}
-            className="bg-orange-900 text-orange-100 p-1 hover:bg-transparent hover:border hover:border-orange-900 hover:text-orange-900 shadow hover:shadow-black shadow-md duration-500"
+            className="bg-orange-900 text-orange-100 p-1 hover:bg-transparent hover:border hover:border-orange-900 hover:text-orange-900 hover:shadow-black shadow-md duration-500"
           >
             SEEGO
           </a>

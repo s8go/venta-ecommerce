@@ -3,32 +3,52 @@ const productsSlice = createSlice({
   name: "products",
   initialState: {
     status: "",
-    data: { cart: [] },
+    data: {
+      cart: [],
+      categories: [],
+      viewedProduct: {}
+    },
   },
   reducers: {
     addProduct(state, actions) {
-      // state.push(actions)
+      // state.push(actions
     },
 
-    removeProduct(state, actions) {
-      // state.pop(actions)
+    clearCartegories(state, actions) {
+      state.data.categories = [];
+      state.data.viewedProduct = {}
     },
+
+    defaultCat(state, actions){
+state.data.categories = [...state.data?.allProducts];
+state.data.status = "stopFetch"
+    },
+
+
 
     addToCart(state, actions) {
       const exist = state.data.cart.findIndex((prod) => {
-       return prod.id === actions.payload.id
-      })
+        return prod.id === actions.payload.id;
+      });
 
-      if(exist >= 0) state.data.cart[exist] = {...state.data.cart[exist] , quantity: state.data.cart[exist].quantity + 1}
+      if (exist >= 0)
+        state.data.cart[exist] = {
+          ...state.data.cart[exist],
+          quantity: state.data.cart[exist].quantity + 1,
+        };
       else state.data.cart.push(actions.payload);
-    // state.data.cart.push(exist);
+
+      // if(window.localStorage.cart === undefined) window.localStorage.cart =JSON.stringify( [actions.payload])
+      // else window.localStorage.cart = JSON.stringify( [...JSON.parse(window.localStorage.cart), actions.payload])
+      // state.data.cart.push(exist);
     },
     removeFromCart(state, actions) {
-           state.data.cart = state.data.cart.filter((prod) => {
-            return prod.id !== actions.payload
-           })
-    }
+      state.data.cart = state.data.cart.filter((prod) => {
+        return prod.id !== actions.payload;
+      });
 
+      window.localStorage.cart = JSON.stringify(state.data.cart)
+    },
   },
 
   extraReducers: (build) => {
@@ -39,6 +59,7 @@ const productsSlice = createSlice({
       .addCase(getProducts.fulfilled, (state, actions) => {
         state.status = "success";
         state.data.allProducts = actions.payload.products;
+        state.data.categories = actions.payload.products;
       })
       .addCase(getProducts.rejected, (state, actions) => {
         state.status = "error";
@@ -79,7 +100,7 @@ export const getCategories = createAsyncThunk(
 );
 
 export const selectProducts = (state) => {
-  return state.products.data.allProducts;
+  return state.products.data?.allProducts;
 };
 
 export const selectProductById = (state) => {
@@ -87,12 +108,11 @@ export const selectProductById = (state) => {
 };
 
 export const selectCart = (state) => {
-    return state.products.data.cart
-  };
+  return state.products.data.cart;
+};
 
-export const selectCategories = (state, url) => {
-  if (state.products.data.categories) return state.products.data.categories;
-  else return state.products.data.allProducts;
+export const selectCategories = (state) => {
+ return state.products.data.categories;
 };
 
 export const productActions = productsSlice.actions;

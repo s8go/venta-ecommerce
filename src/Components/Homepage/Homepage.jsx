@@ -1,20 +1,31 @@
+import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
-import { selectProducts, getCategories } from "../../redux/ProductsSlice";
+import { selectProducts, getCategories, selectCategories, selectProductById, getProducts } from "../../redux/ProductsSlice";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 //swiper css
 import "swiper/css";
+import "swiper/css/navigation";
+
 import { useNavigate } from "react-router-dom";
+import Loading from "../Others/Loading";
+import { Navigation } from "swiper";
 
 const Homepage = () => {
   const Navigate = useNavigate();
   const products = useSelector((state) => selectProducts(state));
   const dispatch = useDispatch();
+  const cat = useSelector(selectCategories)
+
+useEffect(()=>{
+    dispatch(getProducts())
+  },[])
 
 
 
+// console.log(products)
   async function showProducts(cat, url){
-    await dispatch(getCategories(cat))
+    // await dispatch(getCategories(cat))
     await Navigate(url);
     return
   }
@@ -28,11 +39,11 @@ const Homepage = () => {
 
   return (
     <>
-      {products && (
+      {products ? (
         <div className="p-2 mt-24 overflow-hidden">
           <div
             className="h-[80vh]  relative lg:h-[95vh] min-h-[200px] lg:min-h-[500px] mt-1 cursor-pointer lg:flex"
-            onClick={() => showProducts("laptops", "/products/laptops") }
+            onClick={() =>showProducts( undefined,"/products/AllProducts") }
           >
             {products && (
               <>
@@ -156,7 +167,7 @@ const Homepage = () => {
                 />
                 <div
                   className="absolute w-full h-full top-0 left-0 flex justify-center items-end flex-col  p-3 cursor-pointer"
-                  onClick={() => showProducts("laptops", "/products/mens-shirts") }
+                  onClick={() => showProducts("mens-shirts", "/products/mens-shirts") }
                 >
                   <h3 className="text-xl">FOR THE GENTS</h3>
                   <button className="text-lg border border-orange-100 p-2">
@@ -318,11 +329,13 @@ const Homepage = () => {
                       spaceBetween: 3,
                     },
                   }}
+
+                  modules={[Navigation]}
+                  navigation
                 >
                   {products.map((prod, i) => {
                     if (
-                      prod.category === "home-decoration" ||
-                      prod.category === ""
+                      prod.id < 90 && prod.id > 75
                     ) {
                       return (
                         
@@ -359,7 +372,7 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-      )}
+      ) : <Loading>Loading...</Loading>}
     </>
   );
 };

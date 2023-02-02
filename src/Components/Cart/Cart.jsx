@@ -2,17 +2,18 @@ import React, {useState} from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { selectCart, productActions } from "../../redux/ProductsSlice";
 import { useSelector, useDispatch } from "react-redux/es/exports";
+import NoticePage from "../Others/NoticePage";
 
 const Cart = () => {
   const products = useSelector((state) => selectCart(state));
   const total = products.reduce((acc, item)=>{
     return acc + item.price
   }, 0)
-  console.log(total)
 
   return (
   <>
-  {products &&
+  
+  {products  && total > 0 ?
       <div className="p-4 lg:px-12 mt-24">
       <h1>Cart</h1>
 
@@ -40,6 +41,8 @@ const Cart = () => {
         </div>
       </div>
     </div>
+    :
+    <NoticePage>No item in cart...</NoticePage>
   }
   </>
   );
