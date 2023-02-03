@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getCategories, selectCategories, productActions, getProducts } from "../../redux/ProductsSlice";
+import { productActions, getProducts } from "../../redux/ProductsSlice";
 import { useSelector } from "react-redux/es/exports";
 import Pagination from "./Pagination";
 import Prod from "./Items";
@@ -7,11 +7,11 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loading from "../Others/Loading"
 
-const Products = () => {
+const Products = ({selecter, getter}) => {
   const dispatch = useDispatch();
   const {id} = useParams()
   
-  const products = useSelector((state) => selectCategories(state));
+  const products = useSelector((state) => selecter(state));
 
 
 
@@ -22,14 +22,14 @@ const Products = () => {
 
   
   useEffect(()=>{
-    if(id !== "AllProducts" && id !== undefined) dispatch(getCategories(id));
+    if(id !== "AllProducts" && id !== undefined) dispatch(getter(id));
     else dispatch(getProducts())
     
    return () =>{
     dispatch(productActions.clearCartegories())
    }
 
-  }, [])
+  }, [id])
   
   const [smartPhones, setSmart] = useState(null)
   const [length, setLength] = useState([]);
@@ -66,7 +66,7 @@ const Products = () => {
       {products.length > 0 ? (
         <div className="text-orange-900  text-center p-4 mt-24">
           <div className="mt-8 mb-16">
-            {/* <h1 className="text-2xl">{(id[0].toLocaleUpperCase() + id.slice(1).toLocaleLowerCase()) || "All Products"}</h1> */}
+            <h1 className="text-2xl">{(id[0].toLocaleUpperCase() + id.slice(1).toLocaleLowerCase()) || "All Products"}</h1>
 
             <div className="flex flex-col lg:flex-row justify-between mt-4 lg:px-8">
               <p>{products.length} Products</p>

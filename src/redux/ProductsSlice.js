@@ -6,7 +6,8 @@ const productsSlice = createSlice({
     data: {
       cart: [],
       categories: [],
-      viewedProduct: {}
+      viewedProduct: {},
+      searchResult: [],
     },
   },
   reducers: {
@@ -84,6 +85,9 @@ state.data.status = "stopFetch"
       })
       .addCase(getProductById.fulfilled, (state, actions) => {
         state.data.viewedProduct = actions.payload;
+      })
+      .addCase(getSearchResult.fulfilled, (state, actions) => {
+        state.data.searchResult = actions.payload.products;
       });
   },
 });
@@ -114,6 +118,14 @@ export const getCategories = createAsyncThunk(
   }
 );
 
+export const getSearchResult = createAsyncThunk(
+  "products/fetchSearchProduct",
+  async (id) => {
+    const products = await fetch("https://dummyjson.com/products/search?q=" + id);
+    return products.json();
+  }
+);
+
 export const selectProducts = (state) => {
   return state.products.data?.allProducts;
 };
@@ -129,6 +141,10 @@ export const selectCart = (state) => {
 export const selectCategories = (state) => {
  return state.products.data.categories;
 };
+
+export const selectSearchResult = (state) => {
+  return state.products.data.searchResult;
+ };
 
 export const productActions = productsSlice.actions;
 export default productsSlice.reducer;
