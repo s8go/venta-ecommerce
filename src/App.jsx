@@ -25,7 +25,7 @@ useEffect(()=>{
 
   
   return (
-    <div className="font-roboto bg-orange-100 m-0 relative text-orange-100">
+    <div className="font-roboto bg-orange-100 m-0 relative text-orange-100 min-w-[250px]">
 
       <MobileNav />
      <Routes>
