@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaCartArrowDown, FaBars, FaSearch } from "react-icons/fa";
 import Menu from "./Menu";
 import { useSelector } from "react-redux/es/exports";
-import { selectCart, getCategories } from "../../redux/ProductsSlice";
+import {
+  selectCart,
+  getSearchResult,
+} from "../../redux/ProductsSlice";
 import { useDispatch } from "react-redux";
+import BigScrMenu from "./BigScrMenu";
 
 const AdVariant = {
   init: { y: 100 },
@@ -16,12 +20,28 @@ const MobileNav = () => {
   const cart = useSelector((state) => selectCart(state));
   const dispatch = useDispatch();
   const Navigate = useNavigate();
+  const [searchFocus, setSearchFocus] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const inputRef = useCallback((node) => {
+    if (node !== null) {
+      node.focus();
+    }
+  });
 
-  async function showProducts(cat, url) {
-    await dispatch(getCategories(cat));
-    await Navigate(url);
-    return;
+  function search() {
+    setSearchFocus(!searchFocus);
   }
+
+  function searchBtn(val) {
+  if(searchValue){
+    Navigate("search/" + val +"?page=1");
+    getSearchResult(val);
+  }
+  }
+
+
+
+ 
 
   return (
     <>
@@ -100,20 +120,42 @@ const MobileNav = () => {
           {/* <p onClick={()=>setOpenMenu(true)}>menu</p> */}
         </div>
 
-        <Link to="/">
-          <svg width="100" height="30" className="">
-            <text x="40" y="25" fontSize={"20"} fill="rgb(124 45 18)">
-              ENTA
-            </text>
-            <path
-              d="M0 0 L5 0 L15 20 L20 0 L25 0 L45 0 L15 30 Z"
-              fill="rgb(124 45 18)"
-            />
-          </svg>
-        </Link>
+        <div>
+          {searchFocus ? (
+            <div>
+              <input
+                type={"text"}
+                placeholder="search product"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                ref={inputRef}
+                className="outline-none text-orange-900 placeholder:text-orange-200 placeholder:italic p-1 px-3 text-sm w-64 bg-orange-100 border border-orange-900 rounded-lg"
+              />
+              <button
+                type="submit"
+                className=" bg-orange-900 rounded-lg w-20 p-1"
+                onClick={() => searchBtn(searchValue)}
+              >
+                search
+              </button>
+            </div>
+          ) : (
+            <Link to="/">
+              <svg width="100" height="30" className="">
+                <text x="40" y="25" fontSize={"20"} fill="rgb(124 45 18)">
+                  ENTA
+                </text>
+                <path
+                  d="M0 0 L5 0 L15 20 L20 0 L25 0 L45 0 L15 30 Z"
+                  fill="rgb(124 45 18)"
+                />
+              </svg>
+            </Link>
+          )}
+        </div>
 
-        <div className="flex text-orange-900  p-1 text-lg justify-between w-14 relative">
-          <FaSearch />
+        <div className="flex text-orange-900  p-1 text-lg justify-between w-14 relative cursor-pointer">
+          <FaSearch onClick={search} />
 
           <Link to="/cart">
             <FaCartArrowDown />
@@ -145,221 +187,32 @@ const MobileNav = () => {
           </svg>
         </Link>
 
-        <ul className="flex justify-between text-sm text-orange-900 w-full mx-32 ">
-          <li className="group relative ">
-            <p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">
-              Gadgets
-            </p>
-            <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-24 opacity-0 group-hover:opacity-100">
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("smartphones", "/products/smartphones")
-                }
+        <div className="w-2/4 text-center">
+          {searchFocus ? (
+            <div>
+              <input
+                type={"text"}
+                placeholder="search product"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                ref={inputRef}
+                className="outline-none w-3/4  text-orange-900 placeholder:text-orange-200 placeholder:italic p-1 px-3 text-sm bg-orange-100 border border-orange-900 rounded-lg"
+              />
+              <button
+                type="submit"
+                className=" bg-orange-900 rounded-lg w-20 p-1"
+                onClick={() => searchBtn(searchValue)}
               >
-                Smartphones
-              </p>
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() => showProducts("laptops", "/products/laptops")}
-              >
-                Laptops
-              </p>
+                search
+              </button>
             </div>
-          </li>
-
-          <li className="group relative">
-            <p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">
-              Shoes
-            </p>
-            <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-24 opacity-0 group-hover:opacity-100">
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("mens-shoes", "/products/mens-shoes")
-                }
-              >
-                Men's Shoes
-              </p>
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("womens-shoes", "/products/womens-shoes")
-                }
-              >
-                Women's Shoes
-              </p>
-            </div>
-          </li>
-
-          <li className="group relative">
-            <p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">
-              Clothing
-            </p>
-            <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-28 opacity-0 group-hover:opacity-100">
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("mens-shirts", "/products/mens-shirts")
-                }
-              >
-                Men's Shirts
-              </p>
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("womens-dresses", "/products/womens-dresses")
-                }
-              >
-                Women's Dresses
-              </p>
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() => showProducts("tops", "/products/tops")}
-              >
-                Tops
-              </p>
-            </div>
-          </li>
-
-          <li className="group relative">
-            <p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">
-              Accessories
-            </p>
-            <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-28 opacity-0 group-hover:opacity-100">
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("sunglasses", "/products/sunglasses")
-                }
-              >
-                Sunglasses
-              </p>
-
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("womens-jewellery", "/products/womens-jewellery")
-                }
-              >
-                Women's Jewellery
-              </p>
-
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("womens-bags", "/products/womens-bags")
-                }
-              >
-                Women's Bags
-              </p>
-
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("womens-watches", "/products/womens-watches")
-                }
-              >
-                Women's Watches
-              </p>
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("mens-watches", "/products/mens-watches")
-                }
-              >
-                Men's Watches
-              </p>
-            </div>
-          </li>
-
-          <li className="group relative">
-            <p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">
-              Cosmetics
-            </p>
-            <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-28 opacity-0 group-hover:opacity-100">
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() => showProducts("skincare", "/products/skincare")}
-              >
-                Skincare
-              </p>
-
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("fragrances", "/products/fragrances")
-                }
-              >
-                Fragrances
-              </p>
-            </div>
-          </li>
-
-          <li className="group relative">
-            <p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">
-              Home Decor
-            </p>
-            <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-28 opacity-0 group-hover:opacity-100">
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() => showProducts("furniture", "/products/furniture")}
-              >
-                Furnitures
-              </p>
-
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("home-decoration", "/products/home-decoration")
-                }
-              >
-                Appliances
-              </p>
-
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() => showProducts("lighting", "/products/lighting")}
-              >
-                Lighting
-              </p>
-            </div>
-          </li>
-
-          <li className="group relative">
-            <p className="cursor-pointer after:content-[''] after:block after:absolute relative after:w-0 after:h-[2px] after:top-6 after:bg-orange-900 hover:after:w-full after:duration-500">
-              Others
-            </p>
-            <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-24 opacity-0 group-hover:opacity-100">
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() =>
-                  showProducts("automotive", "/products/automotive")
-                }
-              >
-                Automotive
-              </p>
-
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() => showProducts("motocycle", "/products/motocycle")}
-              >
-                Motocycle
-              </p>
-
-              <p
-                className=" my-1 cursor-pointer"
-                onClick={() => showProducts("groceries", "/products/groceries")}
-              >
-                Groceries
-              </p>
-            </div>
-          </li>
-        </ul>
-
+          ) : (
+            <BigScrMenu />
+          )}
+        </div>
         <div className="flex text-orange-900 text-lg justify-between w-32 h-full cursor-pointer relative">
           <div className="flex text-orange-900  p-1 text-lg justify-between  w-32 h-full">
-            <FaSearch />
+            <FaSearch onClick={search} />
           </div>
           <Link to={"/cart"}>
             <FaCartArrowDown className="block w-20 h-full " />

@@ -6,7 +6,8 @@ const productsSlice = createSlice({
     data: {
       cart: [],
       categories: [],
-      viewedProduct: {}
+      viewedProduct: {},
+      searchResult: [],
     },
   },
   reducers: {
@@ -16,15 +17,13 @@ const productsSlice = createSlice({
 
     clearCartegories(state, actions) {
       state.data.categories = [];
-      state.data.viewedProduct = {}
+      state.data.viewedProduct = {};
     },
 
-    defaultCat(state, actions){
-state.data.categories = [...state.data?.allProducts];
-state.data.status = "stopFetch"
+    defaultCat(state, actions) {
+      state.data.categories = [...state.data?.allProducts];
+      state.data.status = "stopFetch";
     },
-
-
 
     addToCart(state, actions) {
       const exist = state.data.cart.findIndex((prod) => {
@@ -47,7 +46,32 @@ state.data.status = "stopFetch"
         return prod.id !== actions.payload;
       });
 
-      window.localStorage.cart = JSON.stringify(state.data.cart)
+      window.localStorage.cart = JSON.stringify(state.data.cart);
+    },
+
+    changeQuantity(state, actions) {
+      const value = state.data.cart.map((item) => {
+        if (
+          item.id === actions.payload.id &&
+          actions.payload.type === "increase"
+        )
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
+        else if (
+          item.id === actions.payload.id &&
+          actions.payload.type === "decrease"
+        )
+          return {
+            ...item,
+            quantity: item.quantity - 1,
+          };
+        return item;
+      });
+
+      state.data.cart = value;
+      window.localStorage.cart = JSON.stringify(value);
     },
   },
 
@@ -69,6 +93,9 @@ state.data.status = "stopFetch"
       })
       .addCase(getProductById.fulfilled, (state, actions) => {
         state.data.viewedProduct = actions.payload;
+      })
+      .addCase(getSearchResult.fulfilled, (state, actions) => {
+        state.data.searchResult = actions.payload.products;
       });
   },
 });
@@ -99,6 +126,17 @@ export const getCategories = createAsyncThunk(
   }
 );
 
+export const getSearchResult = createAsyncThunk(
+  "products/fetchSearchProduct",
+  async (id) => {
+    const products = await fetch(
+      "https://dummyjson.com/products/search?q=" + id
+    );
+    
+    return products.json();
+  }
+);
+
 export const selectProducts = (state) => {
   return state.products.data?.allProducts;
 };
@@ -112,7 +150,11 @@ export const selectCart = (state) => {
 };
 
 export const selectCategories = (state) => {
- return state.products.data.categories;
+  return state.products.data.categories;
+};
+
+export const selectSearchResult = (state) => {
+  return state.products.data.searchResult;
 };
 
 export const productActions = productsSlice.actions;

@@ -7,7 +7,7 @@ import Products from "./Components/Products/Products";
 import ViewProduct from "./Components/Products/ViewProduct";
 import Cart from "./Components/Cart/Cart";
 import { useDispatch } from "react-redux/es/exports";
-import {productActions } from "./redux/ProductsSlice";
+import {productActions, getSearchResult, selectSearchResult, getCategories, selectCategories } from "./redux/ProductsSlice";
 import NoticePage from "./Components/Others/NoticePage";
 
 
@@ -19,7 +19,6 @@ useEffect(()=>{
   if(window.localStorage.cart === undefined) window.localStorage.cart = JSON.stringify([]);
   else if(window.localStorage.cart.length > 0) JSON.parse(window.localStorage.cart).forEach(element => {
     dispatch(productActions.addToCart(element))
-    console.log( JSON.parse(window.localStorage.cart))
   });
   
 }, [])
@@ -31,10 +30,11 @@ useEffect(()=>{
       <MobileNav />
      <Routes>
     <Route path="/" element={ <Homepage />}/>
-    <Route path="/products" element={ <Products />}/>
-    <Route path="/products/:id" element={ <Products />}/>
+    <Route path="/products" element={  <Products selecter={selectCategories} getter={getCategories}/>}/>
+    <Route path="/products/:id" element={ <Products selecter={selectCategories} getter={getCategories}/>}/>
     <Route path="/product/:id" element={ <ViewProduct />}/>
     <Route path="/cart" element={ <Cart />}/>
+  <Route path="/search/:id" element={<Products  selecter={selectSearchResult} getter={getSearchResult}/>}/>
     <Route path="*" element={ <NoticePage > Page Not Found...</NoticePage>}/>
      </Routes>
       <Footer />
