@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
-import { selectProducts, getCategories, selectCategories, selectProductById, getProducts } from "../../redux/ProductsSlice";
+import {
+  selectProducts,
+  selectCategories,
+  getProducts,
+} from "../../redux/ProductsSlice";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 //swiper css
 import "swiper/css";
@@ -15,19 +19,17 @@ const Homepage = () => {
   const Navigate = useNavigate();
   const products = useSelector((state) => selectProducts(state));
   const dispatch = useDispatch();
-  const cat = useSelector(selectCategories)
+  const cat = useSelector(selectCategories);
 
-useEffect(()=>{
-    dispatch(getProducts())
-  },[])
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
 
-
-
-// console.log(products)
-  async function showProducts(cat, url){
+  // console.log(products)
+  async function showProducts(cat, url) {
     // await dispatch(getCategories(cat))
     await Navigate(url);
-    return
+    return;
   }
 
   // async function checkProduct(id, url){
@@ -36,14 +38,13 @@ useEffect(()=>{
   //   return
   // }
 
-
   return (
     <>
       {products ? (
         <div className="p-2 mt-24 overflow-hidden">
           <div
             className="h-[80vh]  relative lg:h-[95vh] min-h-[200px] lg:min-h-[500px] mt-1 cursor-pointer lg:flex"
-            onClick={() =>showProducts( undefined,"/products/AllProducts") }
+            onClick={() => showProducts(undefined, "/products/latest?page=1")}
           >
             {products && (
               <>
@@ -79,7 +80,9 @@ useEffect(()=>{
               <ProductCategories
                 src={products[1].images[1]}
                 delay={0.2}
-                onClick={() => showProducts("laptops", "/products/smartphones") }
+                onClick={() =>
+                  showProducts("laptops", "/products/smartphones?page=1")
+                }
               >
                 SMARTPHONES
               </ProductCategories>
@@ -87,7 +90,7 @@ useEffect(()=>{
               <ProductCategories
                 src={products[31].images[2]}
                 delay={0.4}
-                onClick={() => Navigate("/products/furniture")}
+                onClick={() => Navigate("/products/furniture?page=1")}
               >
                 FURNITURES
               </ProductCategories>
@@ -95,7 +98,9 @@ useEffect(()=>{
               <ProductCategories
                 src={products[91].images[1]}
                 delay={0.2}
-                onClick={() => showProducts("laptops", "/products/motorcycle") }
+                onClick={() =>
+                  showProducts("laptops", "/products/motorcycle?page=1")
+                }
               >
                 MOTOCYCLES
               </ProductCategories>
@@ -103,7 +108,9 @@ useEffect(()=>{
               <ProductCategories
                 src={products[11].images[1]}
                 delay={0.4}
-                onClick={() => showProducts("laptops", "/products/fragrances") }
+                onClick={() =>
+                  showProducts("laptops", "/products/fragrances?page=1")
+                }
               >
                 FRAGRANCES
               </ProductCategories>
@@ -134,7 +141,9 @@ useEffect(()=>{
                 />
                 <div
                   className="absolute w-full h-full top-0 left-0 flex justify-center items-start flex-col  p-3 cursor-pointer"
-                  onClick={() => showProducts("laptops", "/products/womens-dresses") }
+                  onClick={() =>
+                    showProducts("laptops", "/products/womens-dresses?page=1")
+                  }
                 >
                   <h3 className="text-xl">FOR THE LADIES</h3>
                   <button className="text-lg border border-orange-100 p-2">
@@ -167,7 +176,9 @@ useEffect(()=>{
                 />
                 <div
                   className="absolute w-full h-full top-0 left-0 flex justify-center items-end flex-col  p-3 cursor-pointer"
-                  onClick={() => showProducts("mens-shirts", "/products/mens-shirts") }
+                  onClick={() =>
+                    showProducts("mens-shirts", "/products/mens-shirts?page=1")
+                  }
                 >
                   <h3 className="text-xl">FOR THE GENTS</h3>
                   <button className="text-lg border border-orange-100 p-2">
@@ -185,7 +196,7 @@ useEffect(()=>{
               </p>
               <p
                 className="text-sm lg:pl-1 mt-2 lg:mt-0 border-orange-300 border p-2 w-1/2 mx-auto lg:w-auto lg:mx-0 cursor-pointer"
-                onClick={() => Navigate("/products/latest")}
+                onClick={() => Navigate("/products/latest?page=1")}
               >
                 SHOP OUR LATEST RELEASE
               </p>
@@ -193,7 +204,9 @@ useEffect(()=>{
 
             <motion.div
               className="h-72 relative mt-2 lg:h-[90vh]"
-              onClick={() => showProducts("men-shoes", "/products/mens-shoes") }
+              onClick={() =>
+                showProducts("men-shoes", "/products/mens-shoes?page=1")
+              }
               initial={{ scaleX: 2, y: -70 }}
               whileInView={{
                 scaleX: 1,
@@ -223,7 +236,9 @@ useEffect(()=>{
               <p className="text-sm lg:pr-1">BUY SUNGLASSES</p>
               <p
                 className="text-sm lg:pl-1 mt-2 lg:mt-0 border-orange-300 border p-2 w-1/2 mx-auto lg:w-auto lg:mx-0 cursor-pointer"
-                onClick={() => showProducts("sunglasses", "/products/sunglasses") }
+                onClick={() =>
+                  showProducts("sunglasses", "/products/sunglasses?page=1")
+                }
               >
                 SHOP FOR SUNGLASSES
               </p>
@@ -246,7 +261,9 @@ useEffect(()=>{
                   once: false,
                   amount: 0.3,
                 }}
-                onClick={() => showProducts("mens-shirts", "/products/mens-shirts") }
+                onClick={() =>
+                  showProducts("mens-shirts", "/products/mens-shirts?page=1")
+                }
               >
                 <img
                   src={products[54].images[4]}
@@ -279,7 +296,9 @@ useEffect(()=>{
                   amount: 0.3,
                 }}
                 className="h-72 relative mt-[1px] w-full lg:h-[30em] lg:ml-[2px] cursor-pointer"
-                onClick={() => showProducts("womens-bags", "/products/womens-bags") }
+                onClick={() =>
+                  showProducts("womens-bags", "/products/womens-bags?page=1")
+                }
               >
                 <img
                   src={products[71].images[0]}
@@ -329,30 +348,25 @@ useEffect(()=>{
                       spaceBetween: 3,
                     },
                   }}
-
                   modules={[Navigation]}
                   navigation
                 >
                   {products.map((prod, i) => {
-                    if (
-                      prod.id < 90 && prod.id > 75
-                    ) {
+                    if (prod.id < 90 && prod.id > 75) {
                       return (
-                        
-                          <SwiperSlide key={prod.id}>
-                            <NewArrival
-                              src={prod.thumbnail}
-                              onClick={ () => {
-                             Navigate("/product/" + prod.title + "==" + prod.id)
-                              }
-                            }
-                             
-                            >
-                              <h6>{prod.title}</h6>
-                              <p>${prod.price}</p>
-                            </NewArrival>
-                          </SwiperSlide>
-                
+                        <SwiperSlide key={prod.id}>
+                          <NewArrival
+                            src={prod.thumbnail}
+                            onClick={() => {
+                              Navigate(
+                                "/product/" + prod.title + "==" + prod.id
+                              );
+                            }}
+                          >
+                            <h6>{prod.title}</h6>
+                            <p>${prod.price}</p>
+                          </NewArrival>
+                        </SwiperSlide>
                       );
                     }
                   })}
@@ -372,7 +386,9 @@ useEffect(()=>{
             </div>
           </div>
         </div>
-      ) : <Loading>Loading...</Loading>}
+      ) : (
+        <Loading>Loading...</Loading>
+      )}
     </>
   );
 };
@@ -427,7 +443,9 @@ const NewArrival = ({ src, children, onClick, key }) => {
         className="block w-full h-[70%]"
       />
       <div className="w-full h-[30%] grid items-center justify-center shadow-orange-200 shadow-md">
-        <div className="mt-4 text-xs lg:text-sm text-orange-900 ">{children}</div>
+        <div className="mt-4 text-xs lg:text-sm text-orange-900 ">
+          {children}
+        </div>
       </div>
     </div>
   );

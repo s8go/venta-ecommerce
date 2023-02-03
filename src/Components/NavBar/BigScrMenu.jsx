@@ -23,14 +23,14 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("smartphones", "/products/smartphones")
+                  showProducts("smartphones", "/products/smartphones?page=1")
                 }
               >
                 Smartphones
               </p>
               <p
                 className=" my-1 cursor-pointer"
-                onClick={() => showProducts("laptops", "/products/laptops")}
+                onClick={() => showProducts("laptops", "/products/laptops?page=1")}
               >
                 Laptops
               </p>
@@ -45,7 +45,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("mens-shoes", "/products/mens-shoes")
+                  showProducts("mens-shoes", "/products/mens-shoes?page=1")
                 }
               >
                 Men's Shoes
@@ -53,7 +53,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("womens-shoes", "/products/womens-shoes")
+                  showProducts("womens-shoes", "/products/womens-shoes?page=1")
                 }
               >
                 Women's Shoes
@@ -69,7 +69,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("mens-shirts", "/products/mens-shirts")
+                  showProducts("mens-shirts", "/products/mens-shirts?page=1")
                 }
               >
                 Men's Shirts
@@ -77,14 +77,14 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("womens-dresses", "/products/womens-dresses")
+                  showProducts("womens-dresses", "/products/womens-dresses?page=1")
                 }
               >
                 Women's Dresses
               </p>
               <p
                 className=" my-1 cursor-pointer"
-                onClick={() => showProducts("tops", "/products/tops")}
+                onClick={() => showProducts("tops", "/products/tops?page=1")}
               >
                 Tops
               </p>
@@ -99,7 +99,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("sunglasses", "/products/sunglasses")
+                  showProducts("sunglasses", "/products/sunglasses?page=1")
                 }
               >
                 Sunglasses
@@ -108,7 +108,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("womens-jewellery", "/products/womens-jewellery")
+                  showProducts("womens-jewellery", "/products/womens-jewellery?page=1")
                 }
               >
                 Women's Jewellery
@@ -117,7 +117,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("womens-bags", "/products/womens-bags")
+                  showProducts("womens-bags", "/products/womens-bags?page=1")
                 }
               >
                 Women's Bags
@@ -126,7 +126,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("womens-watches", "/products/womens-watches")
+                  showProducts("womens-watches", "/products/womens-watches?page=1")
                 }
               >
                 Women's Watches
@@ -134,7 +134,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("mens-watches", "/products/mens-watches")
+                  showProducts("mens-watches", "/products/mens-watches?page=1")
                 }
               >
                 Men's Watches
@@ -149,7 +149,7 @@ const Navigate = useNavigate()
             <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-28 opacity-0 group-hover:opacity-100">
               <p
                 className=" my-1 cursor-pointer"
-                onClick={() => showProducts("skincare", "/products/skincare")}
+                onClick={() => showProducts("skincare", "/products/skincare?page=1")}
               >
                 Skincare
               </p>
@@ -157,7 +157,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("fragrances", "/products/fragrances")
+                  showProducts("fragrances", "/products/fragrances?page=1")
                 }
               >
                 Fragrances
@@ -172,7 +172,7 @@ const Navigate = useNavigate()
             <div className="absolute bg-orange-200 p-1 duration-1000 text-xs top-8 delay-200 w-28 opacity-0 group-hover:opacity-100">
               <p
                 className=" my-1 cursor-pointer"
-                onClick={() => showProducts("furniture", "/products/furniture")}
+                onClick={() => showProducts("furniture", "/products/furniture?page=1")}
               >
                 Furnitures
               </p>
@@ -180,7 +180,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("home-decoration", "/products/home-decoration")
+                  showProducts("home-decoration", "/products/home-decoration?page=1")
                 }
               >
                 Appliances
@@ -188,7 +188,7 @@ const Navigate = useNavigate()
 
               <p
                 className=" my-1 cursor-pointer"
-                onClick={() => showProducts("lighting", "/products/lighting")}
+                onClick={() => showProducts("lighting", "/products/lighting?page=1")}
               >
                 Lighting
               </p>
@@ -203,7 +203,7 @@ const Navigate = useNavigate()
               <p
                 className=" my-1 cursor-pointer"
                 onClick={() =>
-                  showProducts("automotive", "/products/automotive")
+                  showProducts("automotive", "/products/automotive?page=1")
                 }
               >
                 Automotive
@@ -211,14 +211,14 @@ const Navigate = useNavigate()
 
               <p
                 className=" my-1 cursor-pointer"
-                onClick={() => showProducts("motocycle", "/products/motocycle")}
+                onClick={() => showProducts("motocycle", "/products/motorcycle?page=1")}
               >
-                Motocycle
+                Motorcycle
               </p>
 
               <p
                 className=" my-1 cursor-pointer"
-                onClick={() => showProducts("groceries", "/products/groceries")}
+                onClick={() => showProducts("groceries", "/products/groceries?page=1")}
               >
                 Groceries
               </p>

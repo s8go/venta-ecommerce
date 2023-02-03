@@ -122,11 +122,11 @@ showDrop === "gadgets" &&
                       stiffness: 10,
                     }}
                     >
-                    <p className="text-[0.65em] mt-2 cursor-pointer"  onClick={() => showProducts("smartphones", "/products/smartphones") }>
+                    <p className="text-[0.65em] mt-2 cursor-pointer"  onClick={() => showProducts("smartphones", "/products/smartphones?page=1") }>
                       Smartphones
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer "  onClick={() => showProducts("laptops", "/products/laptops") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer "  onClick={() => showProducts("laptops", "/products/laptops?page=1") }>
                      Laptops
 
                     
@@ -175,11 +175,11 @@ showDrop === "Shoes" &&
                       stiffness: 10,
                     }}
                     >
-                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("mens-shoes", "/products/mens-shoes") }>
+                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("mens-shoes", "/products/mens-shoes?page=1") }>
                      Men's Shoes
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("womens-shoes", "/products/womens-shoes") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("womens-shoes", "/products/womens-shoes?page=1") }>
                     Women's Shoes
 
                     
@@ -226,18 +226,18 @@ showDrop === "clothing" &&
                       stiffness: 10,
                     }}
                     >
-                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("mens-shirts", "/products/mens-shirts") }>
+                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("mens-shirts", "/products/mens-shirts?page=1") }>
                      Men Shirts
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("womens-dresses", "/products/womens-dresses") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("womens-dresses", "/products/womens-dresses?page=1") }>
                     Women Dresses
 
                     
           
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("tops", "/products/tops") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("tops", "/products/tops?page=1") }>
                    Tops
                     </p>
 
@@ -282,29 +282,29 @@ showDrop === "Accessories" &&
                       stiffness: 10,
                     }}
                     >
-                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("sunglasses", "/products/sunglasses") }>
+                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("sunglasses", "/products/sunglasses?page=1") }>
                     Sunglasses
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("womens-jewellery", "/products/womens-jewellery") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("womens-jewellery", "/products/womens-jewellery?page=1") }>
                     Women's Jewellery
                     </p>
 
         
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("womens-bags", "/products/womens-bags") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("womens-bags", "/products/womens-bags?page=1") }>
                     Women's Bags
                     </p>
 
                    
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"  onClick={() => showProducts("womens-watches", "/products/womens-watches") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"  onClick={() => showProducts("womens-watches", "/products/womens-watches?page=1") }>
                     Women's Watches
 
                     
           
                     </p>
-                    <p className="text-[0.65em] mt-2 cursor-pointer"  onClick={() => showProducts("mens-watches", "/products/mens-watches") }>
+                    <p className="text-[0.65em] mt-2 cursor-pointer"  onClick={() => showProducts("mens-watches", "/products/mens-watches?page=1") }>
                      Men's Watches
                     </p>
                     </motion.div>
@@ -349,11 +349,11 @@ showDrop === "cosmetics" &&
                       stiffness: 10,
                     }}
                     >
-                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("skincare", "/products/skincare") }>
+                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("skincare", "/products/skincare?page=1") }>
                      Skincare
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("fragrances", "/products/fragrances") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("fragrances", "/products/fragrances?page=1") }>
                     Fragrances
                     
           
@@ -403,17 +403,17 @@ showDrop === "Home Decor" &&
                       stiffness: 10,
                     }}
                     >
-                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("furniture", "/products/furniture") }>
+                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("furniture", "/products/furniture?page=1") }>
                    Furnitures
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("home-decoration", "/products/home-decoration") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("home-decoration", "/products/home-decoration?page=1") }>
                    Appliances
                     
           
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("lighting", "/products/lighting") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("lighting", "/products/lighting?page=1") }>
                Lighting
           
                     </p>
@@ -459,17 +459,17 @@ showDrop === "others" &&
                       stiffness: 10,
                     }}
                     >
-                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("automotive", "/products/automotive") }>
+                    <p className="text-[0.65em] mt-2 cursor-pointer"   onClick={() => showProducts("automotive", "/products/automotive?page=1") }>
                    Automotive
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("motocycle", "/products/motocycle") }>
-Motocycle
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("motocycle", "/products/motorcycle?page=1") }>
+Motorcycle
                     
           
                     </p>
 
-                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("groceries", "/products/groceries") }>
+                    <p className="text-[0.65em] mt-2  cursor-pointer"   onClick={() => showProducts("groceries", "/products/groceries?page=1") }>
                Groceries
           
                     </p>

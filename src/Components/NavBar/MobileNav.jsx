@@ -6,7 +6,6 @@ import Menu from "./Menu";
 import { useSelector } from "react-redux/es/exports";
 import {
   selectCart,
-  getCategories,
   getSearchResult,
 } from "../../redux/ProductsSlice";
 import { useDispatch } from "react-redux";
@@ -34,9 +33,15 @@ const MobileNav = () => {
   }
 
   function searchBtn(val) {
-    Navigate("search/" + val);
+  if(searchValue){
+    Navigate("search/" + val +"?page=1");
     getSearchResult(val);
   }
+  }
+
+
+
+ 
 
   return (
     <>
@@ -129,10 +134,7 @@ const MobileNav = () => {
               <button
                 type="submit"
                 className=" bg-orange-900 rounded-lg w-20 p-1"
-                onClick={() =>{
-                  Navigate("search/" +searchValue);
-                  getSearchResult(searchValue);
-                }}
+                onClick={() => searchBtn(searchValue)}
               >
                 search
               </button>
