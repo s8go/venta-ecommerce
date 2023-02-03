@@ -120,7 +120,7 @@ const MobileNav = () => {
           {/* <p onClick={()=>setOpenMenu(true)}>menu</p> */}
         </div>
 
-        <div>
+        <div className="w-full sm:w-1/2">
           {searchFocus ? (
             <div>
               <input
@@ -129,11 +129,11 @@ const MobileNav = () => {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 ref={inputRef}
-                className="outline-none text-orange-900 placeholder:text-orange-200 placeholder:italic p-1 px-3 text-sm w-64 bg-orange-100 border border-orange-900 rounded-lg"
+                className="outline-none text-orange-900 placeholder:text-orange-200 placeholder:italic p-1 px-3 text-sm w-2/3 bg-orange-100 border border-orange-900 rounded-lg"
               />
               <button
                 type="submit"
-                className=" bg-orange-900 rounded-lg w-20 p-1"
+                className=" bg-orange-900 rounded-lg w-1/3 text-xs p-1"
                 onClick={() => searchBtn(searchValue)}
               >
                 search
