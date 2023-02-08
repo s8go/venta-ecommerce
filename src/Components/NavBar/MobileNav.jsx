@@ -36,6 +36,9 @@ const MobileNav = () => {
   if(searchValue){
     Navigate("search/" + val +"?page=1");
     getSearchResult(val);
+    setSearchFocus(false)
+    setSearchValue('')
+
   }
   }
 
@@ -120,7 +123,7 @@ const MobileNav = () => {
           {/* <p onClick={()=>setOpenMenu(true)}>menu</p> */}
         </div>
 
-        <div className="w-full sm:w-1/2">
+        <div className="w-full sm:w-1/2 grid place-items-center">
           {searchFocus ? (
             <div>
               <input

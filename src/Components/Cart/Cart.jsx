@@ -6,10 +6,11 @@ import NoticePage from "../Others/NoticePage";
 
 const Cart = () => {
   const products = useSelector((state) => selectCart(state));
+
   const total = products.reduce((acc, item) => {
-    return acc + item.price;
+    return acc + (item.price * item.quantity);
   }, 0);
-  console.log(products);
+  
   return (
     <>
       {products && total > 0 ? (

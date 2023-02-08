@@ -67,7 +67,7 @@ const Products = ({ selecter, getter }) => {
       {products.length > 0 ? (
         <div className="text-orange-900  text-center p-4 mt-24">
           <div className="mt-8 mb-16">
-            {/* <h1 className="text-2xl">{(id[0].toLocaleUpperCase() + id.slice(1).toLocaleLowerCase()) || "All Products"}</h1> */}
+            <h1 className="text-2xl">{(id[0].toLocaleUpperCase() + id.slice(1).toLocaleLowerCase()) || "All Products"}</h1>
 
             <div className="flex flex-col lg:flex-row justify-between mt-4 lg:px-8">
               <p>{products.length} Products</p>
