@@ -3,17 +3,23 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { selectCart, productActions } from "../../redux/ProductsSlice";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import NoticePage from "../Others/NoticePage";
+import { useNavigate } from "react-router-dom";
+import PaystackInt from "./PaystackInt";
 
 const Cart = () => {
   const products = useSelector((state) => selectCart(state));
+  const [pay, setPay] = useState(false)
+  
+  const Navigate = useNavigate()
 
   const total = products.reduce((acc, item) => {
     return acc + (item.price * item.quantity);
   }, 0);
+
   
   return (
     <>
-      {products && total > 0 ? (
+      {products && total > 0 && !pay ? (
         <div className="p-4 lg:px-12 mt-24">
           <h1>Cart</h1>
 
@@ -26,11 +32,10 @@ const Cart = () => {
             <div className=" text-black w-full lg:w-1/2 mt-4 lg:mt-0">
               {" "}
               <p className="text-center text-lg pb-4 flex justify-between">
-                <span> Total:</span>${total}
-                <span>{}</span>
+                <span> Total:</span>₦{total * 400}
               </p>
-              <p className=" border text-orange-100 mt-4 bg-orange-900 text-center text-lg p-4 cursor-pointer">
-                Buy With Pay
+              <p className=" border text-orange-100 mt-4 bg-orange-900 text-center text-lg p-4 cursor-pointer" onClick={()=>setPay(true)}>
+                Buy With Paystack
               </p>
               <p className=" border border-orange-900  mt-4 text-center text-lg p-4 cursor-pointer">
                 Buy Online - Pickup in store
@@ -39,7 +44,7 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <NoticePage>No item in cart...</NoticePage>
+        products && total > 0 && pay ?  <PaystackInt amount={total * 400} ></PaystackInt> : <NoticePage>No item in cart...</NoticePage>
       )}
     </>
   );
@@ -48,8 +53,9 @@ const Cart = () => {
 export default Cart;
 
 const Prod = ({ product }) => {
-  const [qty, setQty] = useState(product.quantity);
   const dispatch = useDispatch();
+
+  
 
   return (
     <>
@@ -110,7 +116,7 @@ const Prod = ({ product }) => {
                 </p>
               </div>
 
-              <p>{"$" + product.price}</p>
+              <p>₦{ product.price * 400}</p>
             </div>
           </div>
         </div>

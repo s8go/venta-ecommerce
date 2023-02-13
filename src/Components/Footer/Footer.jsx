@@ -217,8 +217,7 @@ const Footer = () => {
         <FaCcMastercard className="block mx-2" />
         <FaGooglePay className="block mx-2" />
         <FaPaypal className="block mx-2" />
-        <FaCcVisa className="block mx-2" />
-      </div>
+        <FaCcVisa className="block mx-2" />    </div>
 
       <div className=" text-orange-900 flex flex-col items-center mt-6 text-sm">
         <p>

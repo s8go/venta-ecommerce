@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paystack/inline-js": "^2.12.6",
     "@reduxjs/toolkit": "^1.9.1",
     "framer-motion": "^8.4.3",
     "react": "^18.2.0",

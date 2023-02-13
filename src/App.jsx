@@ -9,6 +9,7 @@ import Cart from "./Components/Cart/Cart";
 import { useDispatch } from "react-redux/es/exports";
 import {productActions, getSearchResult, selectSearchResult, getCategories, selectCategories } from "./redux/ProductsSlice";
 import NoticePage from "./Components/Others/NoticePage";
+import PaystackInt from "./Components/Cart/PaystackInt";
 
 
 
@@ -34,6 +35,8 @@ useEffect(()=>{
     <Route path="/products/:id" element={ <Products selecter={selectCategories} getter={getCategories}/>}/>
     <Route path="/product/:id" element={ <ViewProduct />}/>
     <Route path="/cart" element={ <Cart />}/>
+    <Route path="/payment" element={ <PaystackInt/>}/>
+
   <Route path="/search/:id" element={<Products  selecter={selectSearchResult} getter={getSearchResult}/>}/>
     <Route path="*" element={ <NoticePage > Page Not Found...</NoticePage>}/>
      </Routes>

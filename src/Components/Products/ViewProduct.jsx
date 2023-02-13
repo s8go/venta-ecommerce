@@ -11,7 +11,6 @@ import Loading from "../Others/Loading";
 const ViewProduct = () => {
   const [size, setSize] = useState(null);
   const product = useSelector(state => selectProductById(state));
-  // const [product, setProduct] = useState([])
   const [prodImage, setProdImage] = useState(0);
   const {id} = useParams()
   const dispatch = useDispatch();
@@ -19,10 +18,6 @@ const ViewProduct = () => {
 
   useEffect(()=>{
     setTimeout(()=>setShowAlert(false), 1000)
-    // setProduct(c =>{
-    //   if(viewedProduct.length > 0) return viewedProduct;
-    //   return null;
-    // })
   })
 
   useEffect(()=>{
@@ -77,18 +72,17 @@ const ViewProduct = () => {
             </motion.h1>
             <p className="text-lg mt-4">
               <span className="inline-block text-red-500 line-through">
-                $
-                {product.price -
-                  ((product.price / 100) * product.discountPercentage).toFixed(
+              ₦
+                {((product.price + ((product.price / 100) * product.discountPercentage)) * 400 ).toFixed(
                     2
                   )}
               </span>{" "}
               <span className="inline-block ml-8 text-green-500">
-                ${product.price}
+              ₦{product.price  * 400}
               </span>{" "}
               <span className="inline-block ml-8">
-                Save $
-                {((product.price / 100) * product.discountPercentage).toFixed(
+                Save 
+                ₦{(((product.price / 100) * product.discountPercentage) * 400).toFixed(
                   2
                 )}
               </span>
@@ -146,12 +140,6 @@ const ViewProduct = () => {
                window.localStorage.cart = JSON.stringify( [...JSON.parse(window.localStorage.cart), item])
               }}>
                 ADD TO CART
-              </p>
-              <p className=" border text-orange-100 mt-4 bg-orange-900 text-center text-lg p-4 cursor-pointer">
-                Buy With Pay
-              </p>
-              <p className=" border border-orange-900  mt-4 text-center text-lg p-4 cursor-pointer">
-                Buy Online - Pickup in store
               </p>
             </div>
           </div>

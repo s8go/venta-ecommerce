@@ -138,7 +138,7 @@ const Products = ({ selecter, getter }) => {
                 <div key={item.id}>
                   <Prod
                     image={item.thumbnail}
-                    price={item.price}
+                    price={item.price *400}
                     title={item.title}
                     id={item.id}
                   />
