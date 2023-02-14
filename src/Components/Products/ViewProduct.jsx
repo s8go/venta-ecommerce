@@ -32,7 +32,7 @@ const ViewProduct = () => {
     <>
 
     {
-      showAlert && <Alert/>
+      showAlert && <Alert>Item Added to Cart Successfully!</Alert>
     }
 
       {typeof product.title === "string" ? (

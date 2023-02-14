@@ -3,23 +3,42 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { selectCart, productActions } from "../../redux/ProductsSlice";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import NoticePage from "../Others/NoticePage";
-import { useNavigate } from "react-router-dom";
-import PaystackInt from "./PaystackInt";
+import PaystackPop from "@paystack/inline-js";
+import Alert from "../Others/Alert";
 
 const Cart = () => {
   const products = useSelector((state) => selectCart(state));
-  const [pay, setPay] = useState(false)
-  
-  const Navigate = useNavigate()
+
+  const user = useSelector((state) => state.products.user);
+  const [showAlert, setShowAlert] = useState(false)
+
+
 
   const total = products.reduce((acc, item) => {
-    return acc + (item.price * item.quantity);
+    return acc + item.price * item.quantity;
   }, 0);
 
-  
+  function payment() {
+    const paystack = new PaystackPop();
+
+  if(user.displayName){
+    paystack.newTransaction({
+      key: import.meta.env.VITE_PUBLISH_KEY,
+      amount: (total * 400) * 100,
+      email: user.email,
+      name:user.displayName,
+    });
+  } else{
+   setShowAlert(true)
+
+   setTimeout(()=>setShowAlert(false), 3000)
+  }
+  }
+
   return (
     <>
-      {products && total > 0 && !pay ? (
+    {showAlert && <Alert error={true}>Please, signin to make payment</Alert>}
+      {products && total > 0? (
         <div className="p-4 lg:px-12 mt-24">
           <h1>Cart</h1>
 
@@ -34,7 +53,10 @@ const Cart = () => {
               <p className="text-center text-lg pb-4 flex justify-between">
                 <span> Total:</span>₦{total * 400}
               </p>
-              <p className=" border text-orange-100 mt-4 bg-orange-900 text-center text-lg p-4 cursor-pointer" onClick={()=>setPay(true)}>
+              <p
+                className=" border text-orange-100 mt-4 bg-orange-900 text-center text-lg p-4 cursor-pointer"
+                onClick={payment}
+              >
                 Buy With Paystack
               </p>
               <p className=" border border-orange-900  mt-4 text-center text-lg p-4 cursor-pointer">
@@ -44,7 +66,7 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        products && total > 0 && pay ?  <PaystackInt amount={total * 400} ></PaystackInt> : <NoticePage>No item in cart...</NoticePage>
+        <NoticePage>No item in cart...</NoticePage>
       )}
     </>
   );
@@ -54,8 +76,6 @@ export default Cart;
 
 const Prod = ({ product }) => {
   const dispatch = useDispatch();
-
-  
 
   return (
     <>
@@ -116,7 +136,7 @@ const Prod = ({ product }) => {
                 </p>
               </div>
 
-              <p>₦{ product.price * 400}</p>
+              <p>₦{product.price * 400}</p>
             </div>
           </div>
         </div>

@@ -9,10 +9,14 @@ const productsSlice = createSlice({
       viewedProduct: {},
       searchResult: [],
     },
+    user: {
+
+    }
   },
   reducers: {
-    addProduct(state, actions) {
-      // state.push(actions
+
+    authUser(state, actions) {
+      state.user =   {...actions.payload}
     },
 
     clearCartegories(state, actions) {
