@@ -23,7 +23,7 @@ const Cart = () => {
 
   if(user.displayName){
     paystack.newTransaction({
-      key: import.meta.env.VITE_PUBLISH_KEY,
+      key: "pk_test_e4544a7444dbdb6521239462322053580a10dabf",
       amount: (total * 400) * 100,
       email: user.email,
       name:user.displayName,
