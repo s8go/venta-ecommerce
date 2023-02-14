@@ -28,7 +28,7 @@ const Prod = ({ title, price, image, id }) =>{
         <div className="h-2/5 w-full grid items-center justify-center shadow-orange-200 shadow-md">
           <div className="text-xs lg:text-lg">
             <h5>{title}</h5>
-            <p>${price}</p>
+            <p>₦{price}</p>
           </div>
         </div>
       </motion.div>

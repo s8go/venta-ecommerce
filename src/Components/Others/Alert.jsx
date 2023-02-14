@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const Alert = () => {
+const Alert = ({children, error}) => {
   return (
    <AnimatePresence >
 
@@ -18,10 +18,10 @@ const Alert = () => {
       y: "-5em",
     }}
 
-     className='fixed top-0 left-0 z-[50000] w-full h-12 bg-green-500 flex justify-center items-center'
+     className={`fixed top-0 left-0 z-[50000] w-full h-12 ${error ? "bg-red-500" : "bg-green-500"} flex justify-center items-center`}
      >
         <p className='text-xs lg:text-sm'>
-            Item Added to Cart Successfully!
+            {children}
         </p>
     </motion.div>
    </AnimatePresence>

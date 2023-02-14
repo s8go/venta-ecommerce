@@ -13,7 +13,7 @@ import "swiper/css/navigation";
 
 import { useNavigate } from "react-router-dom";
 import Loading from "../Others/Loading";
-import { Navigation } from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper";
 
 const Homepage = () => {
   const Navigate = useNavigate();
@@ -348,8 +348,15 @@ const Homepage = () => {
                       spaceBetween: 3,
                     },
                   }}
-                  modules={[Navigation]}
+                  modules={[Navigation,Pagination, Autoplay]}
                   navigation
+                  autoplay={{
+                    delay:2500,
+                    disableOnInteraction:false
+                  }}
+                  pagination={{
+                    clickable: true
+                  }}
                 >
                   {products.map((prod, i) => {
                     if (prod.id < 90 && prod.id > 75) {

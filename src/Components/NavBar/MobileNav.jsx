@@ -1,13 +1,16 @@
 import React, { useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaCartArrowDown, FaBars, FaSearch } from "react-icons/fa";
+import {
+  FaCartArrowDown,
+  FaBars,
+  FaSearch,
+  FaUserAlt,
+  FaGoogle,
+} from "react-icons/fa";
 import Menu from "./Menu";
 import { useSelector } from "react-redux/es/exports";
-import {
-  selectCart,
-  getSearchResult,
-} from "../../redux/ProductsSlice";
+import { selectCart, getSearchResult } from "../../redux/ProductsSlice";
 import { useDispatch } from "react-redux";
 import BigScrMenu from "./BigScrMenu";
 
@@ -15,37 +18,38 @@ const AdVariant = {
   init: { y: 100 },
   current: { y: 0, transition: { duration: 0.5, when: "beforeChildren" } },
 };
-const MobileNav = () => {
+const MobileNav = ({ signUp , logout}) => {
   const [openMenu, setOpenMenu] = useState(false);
   const cart = useSelector((state) => selectCart(state));
   const dispatch = useDispatch();
+  const user = useSelector(state=>state.products.user)
   const Navigate = useNavigate();
   const [searchFocus, setSearchFocus] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [showProfile, setShowProfile] = useState(false);
   const inputRef = useCallback((node) => {
     if (node !== null) {
       node.focus();
     }
   });
 
+
   function search() {
     setSearchFocus(!searchFocus);
   }
 
   function searchBtn(val) {
-  if(searchValue){
-    Navigate("search/" + val +"?page=1");
-    getSearchResult(val);
+    if (searchValue) {
+      Navigate("search/" + val + "?page=1");
+      getSearchResult(val);
+      setSearchFocus(false);
+      setSearchValue("");
+    }
   }
-  }
-
-
-
- 
 
   return (
     <>
-      <Menu setOpenMenu={setOpenMenu} openMenu={openMenu} />
+      <Menu setOpenMenu={setOpenMenu} openMenu={openMenu} signUp={signUp} logout={logout}/>
       <motion.div
         className={`h-12 min-h-{50px} min-w-{200px} fixed w-full top-0 left-0 z-[9000] text-center bg-orange-900 text-orange-100 pt-2 lg:flex justify-center items-center`}
         variants={AdVariant}
@@ -120,7 +124,7 @@ const MobileNav = () => {
           {/* <p onClick={()=>setOpenMenu(true)}>menu</p> */}
         </div>
 
-        <div className="w-full sm:w-1/2">
+        <div className="w-full sm:w-1/2 grid place-items-center">
           {searchFocus ? (
             <div>
               <input
@@ -217,11 +221,24 @@ const MobileNav = () => {
           <Link to={"/cart"}>
             <FaCartArrowDown className="block w-20 h-full " />
             {cart.length > 0 && (
-              <p className="absolute left-[70%] bottom-3 bg-green-500 z-10 text-white w-5 h-5 grid place-items-center  text-xs rounded-lg">
+              <p className="absolute left-[58%] bottom-3 bg-green-500 z-10 text-white w-5 h-5 grid place-items-center  text-xs rounded-lg">
                 {cart.length}
               </p>
             )}
           </Link>
+          {user.email ? (
+            <div className="relative">
+              <FaUserAlt className="block  h-full" onClick={()=>setShowProfile(!showProfile)} />
+              <p className={`${showProfile ? "flex" : "hidden"}  flex-col items-center absolute -left-56 text-center top-10 bg-orange-900 text-orange-100 p-2 w-60 text-xs`}>
+                {user.email}
+              <button className="bg-orange-100 text-orange-900 mt-6 p-2 w-1/2 "  onClick={logout}>Logout</button>
+              </p>
+            </div>
+          ) : (
+           
+            <div>  <FaGoogle className="block  h-full" onClick={signUp}/></div>
+       
+          )}
         </div>
       </motion.nav>
     </>
