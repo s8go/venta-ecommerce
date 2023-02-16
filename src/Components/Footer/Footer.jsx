@@ -223,11 +223,11 @@ const Footer = () => {
         <p>
           This site was designed and developed by{" "}
           <a
-            href="https://github.com/owzbi"
+            href="https://github.com/seegow"
             target={"_blank"}
             className="bg-orange-900 text-orange-100 p-1 hover:bg-transparent hover:border hover:border-orange-900 hover:text-orange-900 hover:shadow-black shadow-md duration-500"
           >
-            OWZBI
+            Seego
           </a>
         </p>
         <p>&copy; 2023</p>
